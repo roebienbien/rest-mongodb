@@ -25,13 +25,13 @@ export default function userDashboard() {
     email: string;
   };
 
-  const [users, setUsers] = useState<TUser[]>();
+  const [users, setUsers] = useState<TUser[]>([]);
 
   useEffect(() => {
     const fetchAllUsers = async () => {
       try {
-        const userData = await axios.get<TUser[]>(`${API_ENDPOINT}/users/`);
-        setUsers(userData.data);
+        const { data } = await axios.get<TUser[]>(`${API_ENDPOINT}/users/`);
+        setUsers(data);
       } catch (error) {
         console.log(error);
       }
@@ -39,6 +39,16 @@ export default function userDashboard() {
 
     fetchAllUsers();
   }, []);
+
+  const handleDelete = async (_id: string) => {
+    try {
+      const deletedUser = await axios.delete(`${API_ENDPOINT}/users/:${_id}`);
+      console.log(deletedUser.data);
+      setUsers(users?.filter((user) => user._id !== _id));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className='flex flex-col items-center min-h-screen bg-blue-100 justify-center'>
@@ -61,7 +71,9 @@ export default function userDashboard() {
                   <Link to='/update' className='text-blue-500'>
                     update
                   </Link>
-                  <button className='text-red-500'>delete</button>
+                  <button onClick={() => handleDelete(user._id)} className='text-red-500'>
+                    delete
+                  </button>
                 </td>
               </tr>
             ))
@@ -74,6 +86,7 @@ export default function userDashboard() {
           )}
         </tbody>
       </table>
+      <Link to='/'>Go to Login</Link>
     </div>
   );
 }

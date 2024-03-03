@@ -5,6 +5,10 @@ export function createUser(input: CreateUserInput) {
   return UserModel.create(input);
 }
 
+export function deleteUserById(id: string) {
+  return UserModel.findOneAndDelete({ _id: id });
+}
+
 export function findUserById(id: string) {
   return UserModel.findById(id);
 }
