@@ -26,10 +26,23 @@ export default function userDashboard() {
   };
 
   const [users, setUsers] = useState<TUser[]>([]);
+  const [page, setPage] = useState(0);
+
+  const previousPage = () => {
+    setPage((prevPage) => prevPage - 1);
+    console.log(page);
+  };
+
+  const nextPage = () => {
+    setPage((prevPage) => prevPage + 1);
+    console.log(page);
+  };
+
   useEffect(() => {
     const fetchAllUsers = async () => {
       try {
-        const { data } = await axios.get<TUser[]>(`${API_ENDPOINT}/users/`);
+        // const { data } = await axios.get<TUser[]>(`${API_ENDPOINT}/users/`);
+        const { data } = await axios.get<TUser[]>(`${API_ENDPOINT}/users?p=${page}`);
         setUsers(data);
       } catch (error) {
         console.log(error);
@@ -37,7 +50,7 @@ export default function userDashboard() {
     };
 
     fetchAllUsers();
-  }, []);
+  }, [page]);
 
   const handleDelete = async (id: string) => {
     try {
@@ -94,6 +107,14 @@ export default function userDashboard() {
           )}
         </tbody>
       </table>
+      <div className='space-x-10 justify-center mt-4 flex'>
+        <button onClick={previousPage} className='bg-blue-700 w-20 rounded-lg shadow-lg p-2 text-white'>
+          Prev
+        </button>
+        <button onClick={nextPage} className='bg-blue-700 p-2 w-20 rounded-lg shadow-lg text-white'>
+          Next
+        </button>
+      </div>
     </div>
   );
 }

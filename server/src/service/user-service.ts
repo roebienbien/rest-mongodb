@@ -16,3 +16,7 @@ export function findUserById(id: string) {
 export function findAllUsers() {
   return UserModel.find({});
 }
+
+export function findUsersPaginated(skip: number, limit: number) {
+  return UserModel.find({}).skip(skip).limit(limit);
+}

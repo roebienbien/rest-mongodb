@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { deleteUser, getAllUsers, getUser, registerUser } from '../controllers/user-controller';
+import { deleteUser, getAllUsers, getUser, getUsersPaginated, registerUser } from '../controllers/user-controller';
 import validateResource from '../middleware/validate-resource';
 import { createUserSchema } from '../schema/user-schema';
 
@@ -11,6 +11,7 @@ router.delete('/:id', deleteUser);
 
 router.get('/:id', getUser);
 
-router.get('/', getAllUsers);
+// router.get('/', getAllUsers);
+router.get('/', getUsersPaginated);
 
 export default router;

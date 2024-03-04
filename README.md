@@ -30,3 +30,13 @@ Install server packages
   # Then run
   npm run dev
 ```
+
+### Steps to CRUD
+
+1. npm init, install packages
+
+```bash
+npm i typescript express dotenv zod mongoose mongodb ts-node ts-node-dev zod
+npm i -D @types/express @types/cors
+
+```

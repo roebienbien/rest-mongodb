@@ -1,7 +1,7 @@
 import { UserModel } from '../models/user-model';
 import { Request, Response } from 'express';
 import { CreateUserInput } from '../schema/user-schema';
-import { createUser, deleteUserById, findAllUsers, findUserById } from '../service/user-service';
+import { createUser, deleteUserById, findAllUsers, findUserById, findUsersPaginated } from '../service/user-service';
 
 export const registerUser = async (req: Request<{}, {}, CreateUserInput>, res: Response) => {
   try {
@@ -36,6 +36,20 @@ export const deleteUser = async (req: Request, res: Response) => {
 //     res.sendStatus(400).send(`Cannot delete student ${user?._id} `);
 //   }
 // }
+
+export const getUsersPaginated = async (req: Request, res: Response) => {
+  try {
+    const page = parseInt(req.query.p as string) || 0; //API_ENDPOINT?p=1
+    const perPage = 10;
+    const skipPage = perPage * page;
+
+    console.log(page);
+    const users = await findUsersPaginated(skipPage, perPage);
+    return res.status(200).json(users);
+  } catch (error) {
+    return res.status(400).send(error);
+  }
+};
 
 export const getUser = async (req: Request, res: Response) => {
   try {
