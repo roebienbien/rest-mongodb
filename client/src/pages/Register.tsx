@@ -28,10 +28,10 @@ export default function Register() {
   } = useForm<FormFields>({
     resolver: zodResolver(registerUserSchema),
     defaultValues: {
-      username: 'testname',
+      username: `testUsername`,
       email: 'test@email.com',
-      password: '1231234',
-      confirmPassword: '1231234',
+      password: '123456',
+      confirmPassword: '123456',
     },
   });
 
@@ -39,7 +39,6 @@ export default function Register() {
     try {
       const register = await axios.post(`${API_ENDPOINT}/users/register`, data);
       console.log(register.data);
-
       reset();
     } catch (error) {
       console.error(error);

@@ -6,13 +6,13 @@ import { Link } from 'react-router-dom';
 export default function userDashboard() {
   const TableHeader = [
     {
+      title: '_id',
+    },
+    {
       title: 'username',
     },
     {
       title: 'email',
-    },
-    {
-      title: 'password',
     },
     {
       title: 'actions',
@@ -26,7 +26,6 @@ export default function userDashboard() {
   };
 
   const [users, setUsers] = useState<TUser[]>([]);
-
   useEffect(() => {
     const fetchAllUsers = async () => {
       try {
@@ -40,34 +39,43 @@ export default function userDashboard() {
     fetchAllUsers();
   }, []);
 
-  const handleDelete = async (_id: string) => {
+  const handleDelete = async (id: string) => {
     try {
-      const deletedUser = await axios.delete(`${API_ENDPOINT}/users/:${_id}`);
+      const deletedUser = await axios.delete(`${API_ENDPOINT}/users/:${id}`);
       console.log(deletedUser.data);
-      setUsers(users?.filter((user) => user._id !== _id));
+      setUsers(users?.filter((user) => user._id !== id));
     } catch (error) {
       console.log(error);
     }
   };
 
+  //   users ? () : ()
+
   return (
-    <div className='flex flex-col items-center min-h-screen bg-blue-100 justify-center'>
-      <h2 className='font-bold text-2xl'>Dashboard</h2>
-      {/* <table className='table-auto'> */}
-      <table>
+    <div className='min-h-screen p-4 px-40  bg-blue-100'>
+      <div className='flex justify-between py-4'>
+        <h2 className='font-bold text-4xl'>Users Dashboard</h2>
+        <Link to='/' className='bg-blue-500 p-2 text-white rounded-lg shadow-lg'>
+          Go to Login
+        </Link>
+      </div>
+      <table className='w-full'>
+        {/* <table> */}
         <tbody className=''>
           <tr className=''>
             {TableHeader.map((header, index) => (
-              <th key={index}>{header.title}</th>
+              <th className='w-80 text-left bg-gray-300 text-xl' key={index}>
+                {header.title}
+              </th>
             ))}
           </tr>
           {users ? (
             users.map((user, index) => (
-              <tr key={index}>
-                <td>{user._id}</td>
+              <tr key={index} className='odd:bg-gray-300 text-sm '>
+                <td className=''>{user._id}</td>
                 <td>{user.username}</td>
                 <td>{user.email}</td>
-                <td className='space-x-4'>
+                <td className='space-x-4 p-2'>
                   <Link to='/update' className='text-blue-500'>
                     update
                   </Link>
@@ -86,7 +94,6 @@ export default function userDashboard() {
           )}
         </tbody>
       </table>
-      <Link to='/'>Go to Login</Link>
     </div>
   );
 }
