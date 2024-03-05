@@ -28,20 +28,9 @@ export default function userDashboard() {
   const [users, setUsers] = useState<TUser[]>([]);
   const [page, setPage] = useState(0);
 
-  const previousPage = () => {
-    setPage((prevPage) => prevPage - 1);
-    console.log(page);
-  };
-
-  const nextPage = () => {
-    setPage((prevPage) => prevPage + 1);
-    console.log(page);
-  };
-
   useEffect(() => {
     const fetchAllUsers = async () => {
       try {
-        // const { data } = await axios.get<TUser[]>(`${API_ENDPOINT}/users/`);
         const { data } = await axios.get<TUser[]>(`${API_ENDPOINT}/users?p=${page}`);
         setUsers(data);
       } catch (error) {
@@ -51,6 +40,15 @@ export default function userDashboard() {
 
     fetchAllUsers();
   }, [page]);
+  // }, [page, users]);
+
+  const previousPage = () => {
+    setPage((prevPage) => prevPage - 1);
+  };
+
+  const nextPage = () => {
+    setPage((prevPage) => prevPage + 1);
+  };
 
   const handleDelete = async (id: string) => {
     try {
@@ -65,30 +63,33 @@ export default function userDashboard() {
   //   users ? () : ()
 
   return (
-    <div className='min-h-screen p-4 px-40  bg-blue-100'>
+    <div className='min-h-screen w-full px-10  bg-blue-100'>
       <div className='flex justify-between py-4'>
-        <h2 className='font-bold text-4xl'>Users Dashboard</h2>
+        <h2 className='font-bold text-4xl'>{`Users Dashboard ${page + 1}`}</h2>
+        <button onClick={() => setUsers(users)}>refresh</button>
         <Link to='/' className='bg-blue-500 p-2 text-white rounded-lg shadow-lg'>
           Go to Login
         </Link>
       </div>
       <table className='w-full'>
         {/* <table> */}
-        <tbody className=''>
+        <thead>
           <tr className=''>
             {TableHeader.map((header, index) => (
-              <th className='w-80 text-left bg-gray-300 text-xl' key={index}>
+              <th className='px-2 text-left bg-gray-300' key={index}>
                 {header.title}
               </th>
             ))}
           </tr>
+        </thead>
+        <tbody className=''>
           {users ? (
             users.map((user, index) => (
-              <tr key={index} className='odd:bg-gray-300 text-sm '>
-                <td className=''>{user._id}</td>
-                <td>{user.username}</td>
-                <td>{user.email}</td>
-                <td className='space-x-4 p-2'>
+              <tr key={index} className='even:bg-gray-300 text-sm'>
+                <td className='p-2'>{user._id}</td>
+                <td className=''>{user.username}</td>
+                <td className=''>{user.email}</td>
+                <td className='space-x-4'>
                   <Link to='/update' className='text-blue-500'>
                     update
                   </Link>
