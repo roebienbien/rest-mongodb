@@ -52,7 +52,7 @@ export default function userDashboard() {
 
   const handleDelete = async (id: string) => {
     try {
-      const deletedUser = await axios.delete(`${API_ENDPOINT}/users/:${id}`);
+      const deletedUser = await axios.delete(`${API_ENDPOINT}/users/${id}`);
       console.log(deletedUser.data);
       setUsers(users?.filter((user) => user._id !== id));
     } catch (error) {
