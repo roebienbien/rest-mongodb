@@ -1,7 +1,16 @@
-import { Schema } from 'mongoose';
+import { NextFunction } from 'express';
+// import { Schema, Document } from 'mongoose';
 import z from 'zod';
+import bcrypt from 'bcrypt';
+import { Schema, Document } from 'mongoose';
 
-const userSchema = new Schema(
+interface UserDocument extends Document {
+  username: string;
+  email: string;
+  password: string;
+}
+
+const userSchema = new Schema<UserDocument>(
   {
     username: String,
     email: String,
@@ -9,6 +18,21 @@ const userSchema = new Schema(
   },
   { timestamps: true }
 );
+
+userSchema.pre<UserDocument>('save', async function (next) {
+  if (!this.isModified('password')) {
+    return next(); // If password is not modified, move to the next middleware
+  }
+
+  try {
+    const salt = await bcrypt.genSalt();
+    const hashedPassword = await bcrypt.hash(this.password, salt);
+    this.password = hashedPassword;
+    next();
+  } catch (error: any) {
+    return next(error);
+  }
+});
 
 // using zod to validate resources
 export const createUserSchema = z.object({

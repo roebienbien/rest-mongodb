@@ -15,6 +15,9 @@ export default function userDashboard() {
       title: 'email',
     },
     {
+      title: 'password',
+    },
+    {
       title: 'actions',
     },
   ];
@@ -23,6 +26,7 @@ export default function userDashboard() {
     _id: string;
     username: string;
     email: string;
+    password: string;
   };
 
   const [users, setUsers] = useState<TUser[]>([]);
@@ -71,7 +75,7 @@ export default function userDashboard() {
         <thead>
           <tr className=''>
             {TableHeader.map((header, index) => (
-              <th className='px-2 text-left bg-gray-300' key={index}>
+              <th className=' text-left bg-gray-300' key={index}>
                 {header.title}
               </th>
             ))}
@@ -81,9 +85,10 @@ export default function userDashboard() {
           {users ? (
             users.map((user, index) => (
               <tr key={index} className='even:bg-gray-100 text-sm'>
-                <td className='p-2'>{user._id}</td>
+                <td className=''>{user._id}</td>
                 <td className=''>{user.username}</td>
                 <td className=''>{user.email}</td>
+                <td className=''>{user.password}</td>
                 <td className='space-x-4'>
                   <Link to='/update' className='text-blue-500'>
                     update

@@ -11,7 +11,6 @@ const app = express();
 connectToDb();
 
 // essentials
-// app.use(cors({ origin: 'http://localhost:5173' }));
 app.use(cors());
 app.use(express.json()); //very important: need for post
 
