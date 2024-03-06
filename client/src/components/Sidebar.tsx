@@ -23,9 +23,9 @@ export default function Sidebar() {
   return (
     <div className={`${isOpen ? 'w-64' : 'w-12'} p-4  border-r-2   `}>
       <div>
-        {/* <button onClick={handleOpen} className='text-2xl'>
+        <button onClick={handleOpen} className='text-2xl'>
           Open
-        </button> */}
+        </button>
         <ul className='space-y-10 mt-4'>
           {NavLinks.map((link, index) => (
             <li key={index} className='text-xl'>
