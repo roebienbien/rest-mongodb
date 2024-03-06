@@ -1,30 +1,37 @@
+// import { Link } from 'react-router-dom';
+
+import { Link } from 'react-router-dom';
+
 export const Navbar = () => {
   const NavLinks = [
     {
       title: 'Home',
-      to: '/home',
+      src: '/home',
     },
     {
       title: 'About',
-      to: '/about',
+      src: '/about',
     },
     {
-      title: 'contact',
-      to: '/home',
+      title: 'Contact',
+      src: '/home',
     },
   ];
 
   return (
-    <div className='sticky bg-green-200 h-16  px-20 top-0 z-50 '>
+    <div className='sticky border-2  h-20 px-20 top-0 z-50 '>
       <div className='flex justify-between h-full items-center '>
-        <h3>Logo Here</h3>
+        <h3 className='font-bold text-2xl cursor-pointer'>Logo </h3>
         <ul className='space-x-10 flex'>
           {NavLinks.map((link, index) => (
-            <li key={index} className=''>
-              {link.title}
+            <li key={index}>
+              <Link to={link.src} className='text-xl font-semibold'>
+                {link.title}
+              </Link>
             </li>
           ))}
         </ul>
+        <button className='bg-blue-500 px-4 py-3 text-lg text-white rounded-lg shadow-lg'>Login</button>
       </div>
     </div>
   );

@@ -1,18 +1,19 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Sidebar() {
   const NavLinks = [
     {
       title: 'Dashboard',
-      to: '/dashboard',
+      to: '/userDashboard',
     },
     {
       title: 'About',
-      to: '/home',
+      to: '/',
     },
     {
       title: 'Settings',
-      to: '/home',
+      to: '/',
     },
   ];
 
@@ -20,18 +21,18 @@ export default function Sidebar() {
 
   const handleOpen = () => setIsOpen((prevState) => !prevState);
   return (
-    // <div className={`p-4 bg-red-200 w-64`}>
-    <div className={`${isOpen ? 'w-64' : 'w-12'} p-4 bg-red-200`}>
+    <div className={`${isOpen ? 'w-64' : 'w-12'} p-4  border-r-2   `}>
       <div>
-        <ul className='space-y-10'>
+        {/* <button onClick={handleOpen} className='text-2xl'>
+          Open
+        </button> */}
+        <ul className='space-y-10 mt-4'>
           {NavLinks.map((link, index) => (
             <li key={index} className='text-xl'>
-              {link.title}
+              <Link to={link.to}>{link.title}</Link>
             </li>
           ))}
         </ul>
-        {/* <button onClick={() => setIsOpen((prevState) => !prevState)}>OpenClose</button> */}
-        <button onClick={handleOpen}>OpenClose</button>
       </div>
     </div>
   );

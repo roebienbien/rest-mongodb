@@ -9,8 +9,8 @@ import UpdateUser from './pages/UpdateUser';
 
 function App() {
   return (
-    <Layout>
-      <BrowserRouter>
+    <BrowserRouter>
+      <Layout>
         <Routes>
           <Route path='*' element={<NotFound />} />
           <Route path='/' element={<Login />} />
@@ -18,8 +18,8 @@ function App() {
           <Route path='/register' element={<Register />} />
           <Route path='/update' element={<UpdateUser />} />
         </Routes>
-      </BrowserRouter>
-    </Layout>
+      </Layout>
+    </BrowserRouter>
   );
 }
 

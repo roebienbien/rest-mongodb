@@ -40,7 +40,6 @@ export default function userDashboard() {
 
     fetchAllUsers();
   }, [page]);
-  // }, [page, users]);
 
   const previousPage = () => {
     setPage((prevPage) => prevPage - 1);
@@ -63,15 +62,11 @@ export default function userDashboard() {
   //   users ? () : ()
 
   return (
-    <div className='min-h-screen w-full px-10  bg-blue-100'>
+    <div className='min-h-screen w-full px-10 '>
       <div className='flex justify-between py-4'>
         <h2 className='font-bold text-4xl'>{`Users Dashboard ${page + 1}`}</h2>
-        <button onClick={() => setUsers(users)}>refresh</button>
-        <Link to='/' className='bg-blue-500 p-2 text-white rounded-lg shadow-lg'>
-          Go to Login
-        </Link>
       </div>
-      <table className='w-full'>
+      <table className='w-full overflow-x-clip'>
         {/* <table> */}
         <thead>
           <tr className=''>
@@ -85,7 +80,7 @@ export default function userDashboard() {
         <tbody className=''>
           {users ? (
             users.map((user, index) => (
-              <tr key={index} className='even:bg-gray-300 text-sm'>
+              <tr key={index} className='even:bg-gray-100 text-sm'>
                 <td className='p-2'>{user._id}</td>
                 <td className=''>{user.username}</td>
                 <td className=''>{user.email}</td>

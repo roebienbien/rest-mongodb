@@ -33,7 +33,7 @@ export default function Login() {
   };
 
   return (
-    <div className='h-screen flex items-center justify-center'>
+    <div className='h-screen w-full flex items-center justify-center'>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className='flex flex-col justify-center w-full items-center  gap-4 h-screen  bg-zinc-300  '>
