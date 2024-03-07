@@ -84,7 +84,7 @@ export default function userDashboard() {
         <tbody className=''>
           {users ? (
             users.map((user, index) => (
-              <tr key={index} className='even:bg-gray-100 text-sm'>
+              <tr key={index} className='even:bg-gray-100 text-sm lowercase'>
                 <td className=''>{user._id}</td>
                 <td className=''>{user.username}</td>
                 <td className=''>{user.email}</td>

@@ -21,7 +21,7 @@ export default function Sidebar() {
 
   const handleOpen = () => setIsOpen((prevState) => !prevState);
   return (
-    <div className={`${isOpen ? 'w-64' : 'w-12'} p-4  border-r-2   `}>
+    <div className={`${isOpen ? 'w-64' : 'w-12'} p-4 h-screen  border-r-2   `}>
       <div>
         <button onClick={handleOpen} className='text-2xl'>
           Open

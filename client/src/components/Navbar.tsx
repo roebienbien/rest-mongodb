@@ -31,7 +31,9 @@ export const Navbar = () => {
             </li>
           ))}
         </ul>
-        <button className='bg-blue-500 px-4 py-3 text-lg text-white rounded-lg shadow-lg'>Login</button>
+        <Link to='/' className='bg-blue-500 px-4 py-3 text-lg text-white rounded-lg shadow-lg'>
+          Login
+        </Link>
       </div>
     </div>
   );
