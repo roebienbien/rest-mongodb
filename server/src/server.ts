@@ -11,7 +11,7 @@ const app = express();
 connectToDb();
 
 // essentials
-app.use(cors());
+app.use(cors({ origin: config.origin }));
 app.use(express.json()); //very important: need for post
 
 app.use(router);

@@ -16,6 +16,7 @@ const MONGO = {
 const config = {
   server: SERVER,
   mongo: MONGO,
+  origin: process.env.CLIENT_ORIGIN,
 };
 
 export default config;
