@@ -1,5 +1,13 @@
 # CRUD MongoDb
 
+## env
+
+- PORT = 1337
+- MONGO_URI = mongodb+srv://roebien:mongodb123@cluster0.jnb6z.mongodb.net/crud_mongo_db
+
+- CLIENT_ORIGIN = http://localhost:5173
+  http://localhost:5173/register
+
 ## Installing packages
 
 Install server packages

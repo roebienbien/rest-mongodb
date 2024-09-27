@@ -88,7 +88,7 @@ export default function userDashboard() {
                 <td className=''>{user._id}</td>
                 <td className=''>{user.username}</td>
                 <td className=''>{user.email}</td>
-                <td className=''>{user.password}</td>
+                {/* <td className=''>{user.password}</td> */}
                 <td className='space-x-4'>
                   <Link to='/update' className='text-blue-500'>
                     update

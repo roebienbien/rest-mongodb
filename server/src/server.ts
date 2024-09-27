@@ -15,6 +15,7 @@ app.use(cors({ origin: config.origin }));
 app.use(express.json()); //very important: need for post
 
 app.use(router);
+console.log(config.origin);
 
 const httpServer = http.createServer(app);
 httpServer.listen(config.server.port, () => {
